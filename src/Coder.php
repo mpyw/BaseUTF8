@@ -2,7 +2,7 @@
 
 namespace mpyw\BaseUTF8;
 
-class BaseUTF8 {
+class Coder {
 
     private $table;
     private $power;
