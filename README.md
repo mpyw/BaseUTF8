@@ -14,7 +14,7 @@ composer require mpyw/base-utf8
 require 'vendor/autoload.php';
 use mpyw\BaseUTF8\BaseUTF8;
 
-$base = new BaseUTF8; // Default is base 64
+$base = new BaseUTF8; // Default is base64
 echo $base->encode('foobar') . PHP_EOL; // Zm9vYmFy
 echo $base->decode('Zm9vYmFy') . PHP_EOL; // foobar
 

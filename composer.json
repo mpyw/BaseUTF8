@@ -15,7 +15,7 @@
         "php": ">=5.4.0",
         "lib-pcre": "*"
     },
-    "autload": {
+    "autoload": {
         "psr-4": {
             "mpyw\\BaseUTF8\\": "src/"
         }
