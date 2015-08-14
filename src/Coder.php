@@ -110,6 +110,9 @@ class Coder {
                 }
             }
         }
+        if ($follows !== -1) {
+            throw new \RuntimeException('Invalid UTF-8 sequence.');
+        }
         return $buffer;
     }
 
