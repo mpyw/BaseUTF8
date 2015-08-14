@@ -96,7 +96,8 @@ class Coder {
                             throw new \RuntimeException('Invalid UTF-8 sequence.');
                     }
                 } elseif (
-                    $ord < 0x80 || $ord > 0xBF ||
+                    $ord < 0x80 || $ord > 0xBF or
+                    !isset($bytes[1]) and
                     $bytes[0] === "\xE0" && $ord < 0xA0 ||
                     $bytes[0] === "\xED" && $ord > 0x9F ||
                     $bytes[0] === "\xF0" && $ord < 0x90 ||
