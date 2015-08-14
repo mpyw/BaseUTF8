@@ -85,15 +85,21 @@ class BaseUTF8 {
                     $follows = -1;
                     switch (true) {
                         case (++$follows || true) && $ord >= 0x00 && $ord <= 0x7F:
-                        case (++$follows || true) && $ord >= 0xC0 && $ord <= 0xDF:
+                        case (++$follows || true) && $ord >= 0xC2 && $ord <= 0xDF:
                         case (++$follows || true) && $ord >= 0xE0 && $ord <= 0xEF:
-                        case (++$follows || true) && $ord >= 0xF0 && $ord <= 0xF7:
+                        case (++$follows || true) && $ord >= 0xF0 && $ord <= 0xF4:
                             $bytes .= $char;
                             break;
                         default:
                             throw new \RuntimeException('Invalid UTF-8 sequence.');
                     }
-                } elseif ($ord < 0x80 || $ord > 0xBF) {
+                } elseif (
+                    $ord < 0x80 || $ord > 0xBF ||
+                    $bytes === "\xE0" && $ord < 0xA0 ||
+                    $bytes === "\xED" && $ord > 0x9F ||
+                    $bytes === "\xF0" && $ord < 0x90 ||
+                    $bytes === "\xF4" && $ord > 0x8F
+                ) {
                     throw new \RuntimeException('Invalid UTF-8 sequence.');
                 } else {
                     --$follows;

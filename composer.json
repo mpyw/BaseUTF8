@@ -1,6 +1,6 @@
 {
     "name": "mpyw/base-utf8",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "BaseXX encoder/decoder those support any valid UTF-8 sequences.",
     "type": "library",
     "license": "MIT",
