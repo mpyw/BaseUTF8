@@ -22,7 +22,7 @@ $base = new BaseUTF8('ABCDabcd'); // Base8
 echo $base->encode('foobar') . PHP_EOL; // DBacdbbdDAacAbcC
 echo $base->decode('DBacdbbdDAacAbcC') . PHP_EOL; // foobar
 
-$base = new BaseUTF8('ンアッーイキソ！'); // UTF-8 base64
+$base = new BaseUTF8('ンアッーイキソ！'); // UTF-8 base8
 echo $base->encode('田所浩二') . PHP_EOL;
 echo $base->decode('！ア！アッッソン！アキンイソンン！アキーッソキア！アアーキッアイ') . PHP_EOL;
 ```
