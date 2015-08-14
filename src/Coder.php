@@ -83,7 +83,6 @@ class Coder {
                 $char = $data[$i++];
                 $ord = ord($char);
                 if ($bytes === '') {
-                    $follows = -1;
                     switch (true) {
                         case $ord <= 0x20:
                             break;
@@ -98,10 +97,10 @@ class Coder {
                     }
                 } elseif (
                     $ord < 0x80 || $ord > 0xBF ||
-                    $bytes === "\xE0" && $ord < 0xA0 ||
-                    $bytes === "\xED" && $ord > 0x9F ||
-                    $bytes === "\xF0" && $ord < 0x90 ||
-                    $bytes === "\xF4" && $ord > 0x8F
+                    $bytes[0] === "\xE0" && $ord < 0xA0 ||
+                    $bytes[0] === "\xED" && $ord > 0x9F ||
+                    $bytes[0] === "\xF0" && $ord < 0x90 ||
+                    $bytes[0] === "\xF4" && $ord > 0x8F
                 ) {
                     throw new \RuntimeException('Invalid UTF-8 sequence.');
                 } else {
