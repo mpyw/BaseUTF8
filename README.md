@@ -10,7 +10,7 @@ composer require mpyw/base-utf8
 
 ## Features
 
-Pass your character set as the first argument for the constructor.\\
+Pass your character set as the first argument for the constructor.  
 Default value is `ABCD...WXYZabcd...wxyz0123456789+/` (Base64).
 
 - It must be either array or string.
