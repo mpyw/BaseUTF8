@@ -14,13 +14,14 @@ class Coder {
         if (!is_array($chars)) {
             throw new \InvalidArgumentException('$chars must be array or string.');
         }
-        $uniq = $values = [];
+        $uniq = array_flip(range("\x00", "\x20"));
+        $values = [];
         foreach ($chars as $char) {
             if (!is_string($char)) {
                 throw new \InvalidArgumentException('Elements of $chars must be string.');
             }
             if (isset($uniq[$char])) {
-                throw new \InvalidArgumentException('$chars contains duplicated characters.');
+                throw new \InvalidArgumentException('$chars must be non-control unique chars.');
             }
             $uniq[$char] = true;
             $values[] = $char;
@@ -84,7 +85,9 @@ class Coder {
                 if ($bytes === '') {
                     $follows = -1;
                     switch (true) {
-                        case (++$follows || true) && $ord >= 0x00 && $ord <= 0x7F:
+                        case $ord <= 0x20:
+                            break;
+                        case (++$follows || true) && $ord >= 0x21 && $ord <= 0x7F:
                         case (++$follows || true) && $ord >= 0xC2 && $ord <= 0xDF:
                         case (++$follows || true) && $ord >= 0xE0 && $ord <= 0xEF:
                         case (++$follows || true) && $ord >= 0xF0 && $ord <= 0xF4:
