@@ -1,0 +1,23 @@
+{
+    "name": "mpyw/base-utf8",
+    "version": "1.0.0",
+    "description": "BaseXX encoder/decoder those support any valid UTF-8 sequences.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mpyw",
+            "email": "ryosuke_i_628@yahoo.co.jp"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "lib-pcre": "*"
+    },
+    "autload": {
+        "psr-4": {
+            "mpyw\\BaseUTF8\\": "src/"
+        }
+    }
+}
