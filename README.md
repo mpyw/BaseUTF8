@@ -21,7 +21,7 @@ Default value is `ABCD...WXYZabcd...wxyz0123456789+/` (Base64).
 ## Example
 
 ```php
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 use mpyw\BaseUTF8\Coder;
 
 $coder = new Coder; // Base64
