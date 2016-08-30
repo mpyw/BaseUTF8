@@ -9,7 +9,6 @@
             "email": "ryosuke_i_628@yahoo.co.jp"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "lib-pcre": "*"
