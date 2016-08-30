@@ -2,12 +2,13 @@
 
 namespace mpyw\BaseUTF8;
 
-class Coder {
-
+class Coder
+{
     private $table;
     private $power;
 
-    public function __construct($chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/') {
+    public function __construct($chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/')
+    {
         if (is_string($chars)) {
             $chars = preg_split('//u', $chars, -1, PREG_SPLIT_NO_EMPTY);
         }
@@ -35,7 +36,8 @@ class Coder {
         $this->table['decode'] = array_flip($values);
     }
 
-    public function encode($data) {
+    public function encode($data)
+    {
         $length = strlen($data);
         $buffer = '';
         $i = $width = $code = 0;
@@ -58,7 +60,8 @@ class Coder {
         return $buffer;
     }
 
-    public function decode($data) {
+    public function decode($data)
+    {
         $length = strlen($data);
         $buffer = $bytes = '';
         $i = $width = $code = 0;
@@ -115,5 +118,4 @@ class Coder {
         }
         return $buffer;
     }
-
 }
