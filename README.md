@@ -22,7 +22,7 @@ Default value is `ABCD...WXYZabcd...wxyz0123456789+/` (Base64).
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
-use mpyw\BaseUTF8\Coder;
+use Mpyw\BaseUTF8\Coder;
 
 $coder = new Coder; // Base64
 echo $coder->encode('foobar') . PHP_EOL; // Zm9vYmFy
