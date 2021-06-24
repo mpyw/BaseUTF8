@@ -10,12 +10,12 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.3.2",
         "lib-pcre": "*"
     },
     "autoload": {
         "psr-4": {
-            "mpyw\\BaseUTF8\\": "src/"
+            "Mpyw\\BaseUTF8\\": "src/"
         }
     }
 }

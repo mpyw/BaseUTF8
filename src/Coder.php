@@ -1,24 +1,36 @@
 <?php
 
-namespace mpyw\BaseUTF8;
+namespace Mpyw\BaseUTF8;
 
 class Coder
 {
+    /**
+     * @var string[][]
+     */
     private $table;
+
+    /**
+     * @var int
+     */
     private $power;
 
+    /**
+     * Coder constructor.
+     *
+     * @param string $chars
+     */
     public function __construct($chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/')
     {
-        if (is_string($chars)) {
-            $chars = preg_split('//u', $chars, -1, PREG_SPLIT_NO_EMPTY);
+        if (\is_string($chars)) {
+            $chars = \preg_split('//u', $chars, -1, PREG_SPLIT_NO_EMPTY);
         }
-        if (!is_array($chars)) {
+        if (!\is_array($chars)) {
             throw new \InvalidArgumentException('$chars must be array or string.');
         }
-        $uniq = array_flip(range("\x00", "\x20"));
-        $values = [];
+        $uniq = \array_flip(\range("\x00", "\x20"));
+        $values = array();
         foreach ($chars as $char) {
-            if (!is_string($char)) {
+            if (!\is_string($char)) {
                 throw new \InvalidArgumentException('Elements of $chars must be string.');
             }
             if (isset($uniq[$char])) {
@@ -27,18 +39,22 @@ class Coder
             $uniq[$char] = true;
             $values[] = $char;
         }
-        $log = log(count($values), 2);
+        $log = \log(\count($values), 2);
         if ((string)$log !== (string)(int)$log) {
             throw new \InvalidArgumentException('log_2(count($chars)) must be absolutely integer.');
         }
         $this->power = (int)$log;
         $this->table['encode'] = $values;
-        $this->table['decode'] = array_flip($values);
+        $this->table['decode'] = \array_flip($values);
     }
 
+    /**
+     * @param string $data
+     * @return string
+     */
     public function encode($data)
     {
-        $length = strlen($data);
+        $length = \strlen($data);
         $buffer = '';
         $i = $width = $code = 0;
         while (true) {
@@ -50,7 +66,7 @@ class Coder
                 break;
             } else {
                 $code <<= 8;
-                $code |= ord($data[$i++]);
+                $code |= \ord($data[$i++]);
                 $width += 8;
             }
         }
@@ -60,9 +76,13 @@ class Coder
         return $buffer;
     }
 
+    /**
+     * @param string $data
+     * @return string
+     */
     public function decode($data)
     {
-        $length = strlen($data);
+        $length = \strlen($data);
         $buffer = $bytes = '';
         $i = $width = $code = 0;
         $follows = -1;
@@ -78,13 +98,13 @@ class Coder
                 $follows = -1;
             } elseif ($width >= 8) {
                 $width -= 8;
-                $buffer .= chr($code >> $width);
+                $buffer .= \chr($code >> $width);
                 $code &= (1 << $width) - 1;
             } elseif ($i >= $length) {
                 break;
             } else {
                 $char = $data[$i++];
-                $ord = ord($char);
+                $ord = \ord($char);
                 if ($bytes === '') {
                     switch (true) {
                         case $ord <= 0x20:
